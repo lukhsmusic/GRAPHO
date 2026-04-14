@@ -1,14 +1,14 @@
-import { EditorView, keymap, lineNumbers, highlightActiveLine, highlightActiveLineGutter } from "@codemirror/view";
-import { EditorState } from "@codemirror/state";
-import { markdown } from "@codemirror/lang-markdown";
-import { defaultKeymap, indentWithTab, history, historyKeymap } from "@codemirror/commands";
-import { syntaxHighlighting, defaultHighlightStyle, bracketMatching } from "@codemirror/language";
-import { searchKeymap, highlightSelectionMatches } from "@codemirror/search";
-import { oneDark } from "@codemirror/theme-one-dark";
+import { EditorView, keymap, lineNumbers, highlightActiveLine, highlightActiveLineGutter } from "https://esm.sh/@codemirror/view@6.41.0";
+import { EditorState } from "https://esm.sh/@codemirror/state@6.6.0";
+import { markdown } from "https://esm.sh/@codemirror/lang-markdown@6.5.0";
+import { defaultKeymap, indentWithTab, history, historyKeymap } from "https://esm.sh/@codemirror/commands@6.10.3";
+import { syntaxHighlighting, defaultHighlightStyle, bracketMatching } from "https://esm.sh/@codemirror/language@6.12.3";
+import { searchKeymap, highlightSelectionMatches } from "https://esm.sh/@codemirror/search@6.6.0";
+import { oneDark } from "https://esm.sh/@codemirror/theme-one-dark@6.1.3";
 
 const container = document.getElementById("cm-editor");
 const filePath = container.dataset.filePath;
-const initialContent = container.dataset.fileContent;
+const initialContent = JSON.parse(document.getElementById("file-content-data").textContent);
 const statusEl = document.getElementById("save-status");
 
 let saveTimeout = null;
@@ -40,7 +40,6 @@ async function save(content) {
         isDirty = false;
     } catch (e) {
         setStatus("Fehler beim Speichern", "error");
-        // Retry after 3 seconds
         setTimeout(() => save(editor.state.doc.toString()), 3000);
     }
 }
