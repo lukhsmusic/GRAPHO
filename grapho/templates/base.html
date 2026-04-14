@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAPHO{% if file_path %} — {{ file_path }}{% endif %}</title>
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#1e1e2e">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "codemirror": "https://esm.sh/codemirror@6.0.1",
+            "@codemirror/view": "https://esm.sh/@codemirror/view@6.35.3",
+            "@codemirror/state": "https://esm.sh/@codemirror/state@6.5.2",
+            "@codemirror/lang-markdown": "https://esm.sh/@codemirror/lang-markdown@6.3.2",
+            "@codemirror/language": "https://esm.sh/@codemirror/language@6.10.8",
+            "@codemirror/commands": "https://esm.sh/@codemirror/commands@6.7.2",
+            "@codemirror/search": "https://esm.sh/@codemirror/search@6.5.10",
+            "@codemirror/theme-one-dark": "https://esm.sh/@codemirror/theme-one-dark@6.1.2"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <nav id="sidebar">
+            <div id="sidebar-header">
+                <h1>GRAPHO</h1>
+                <button id="sidebar-toggle" title="Sidebar toggle">&#9776;</button>
+            </div>
+            <div id="sidebar-actions">
+                <button onclick="createFile()" title="Neue Datei">+ Datei</button>
+                <button onclick="createDir()" title="Neuer Ordner">+ Ordner</button>
+            </div>
+            <div id="sidebar-search">
+                <input type="text" id="search-input" placeholder="Suche..." oninput="filterTree(this.value)">
+            </div>
+            <div id="file-tree">
+                {% include "partials/file_tree.html" %}
+            </div>
+        </nav>
+        <main id="editor-pane">
+            {% if file_path %}
+            <div id="editor-header">
+                <span id="file-name">{{ file_path }}</span>
+                <span id="save-status"></span>
+            </div>
+            <div id="cm-editor"
+                 data-file-path="{{ file_path }}"
+                 data-file-content="{{ file_content | e }}"></div>
+            <script type="module" src="/static/js/editor.js"></script>
+            {% else %}
+            <div id="welcome">
+                <h2>Willkommen bei GRAPHO</h2>
+                <p>Waehle eine Datei in der Seitenleiste aus, um sie zu bearbeiten.</p>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+    <script src="/static/js/app.js"></script>
+    <script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/static/sw.js");
+    }
+    </script>
+</body>
+</html>
