@@ -1,10 +1,10 @@
-import { EditorView, keymap, lineNumbers, highlightActiveLine, highlightActiveLineGutter } from "https://esm.sh/@codemirror/view@6.41.0";
-import { EditorState } from "https://esm.sh/@codemirror/state@6.6.0";
-import { markdown } from "https://esm.sh/@codemirror/lang-markdown@6.5.0";
-import { defaultKeymap, indentWithTab, history, historyKeymap } from "https://esm.sh/@codemirror/commands@6.10.3";
-import { syntaxHighlighting, defaultHighlightStyle, bracketMatching } from "https://esm.sh/@codemirror/language@6.12.3";
-import { searchKeymap, highlightSelectionMatches } from "https://esm.sh/@codemirror/search@6.6.0";
-import { oneDark } from "https://esm.sh/@codemirror/theme-one-dark@6.1.3";
+import { EditorView, keymap, lineNumbers, highlightActiveLine, highlightActiveLineGutter } from "https://esm.sh/@codemirror/view@6";
+import { EditorState } from "https://esm.sh/@codemirror/state@6";
+import { markdown } from "https://esm.sh/@codemirror/lang-markdown@6";
+import { defaultKeymap, indentWithTab, history, historyKeymap } from "https://esm.sh/@codemirror/commands@6";
+import { syntaxHighlighting, defaultHighlightStyle, bracketMatching } from "https://esm.sh/@codemirror/language@6";
+import { searchKeymap, highlightSelectionMatches } from "https://esm.sh/@codemirror/search@6";
+import { oneDark } from "https://esm.sh/@codemirror/theme-one-dark@6";
 
 const container = document.getElementById("cm-editor");
 const filePath = container.dataset.filePath;
